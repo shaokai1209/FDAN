@@ -5,7 +5,7 @@ import backbones
 from module import Attention, PreNorm, FeedForward, CrossAttention
 
 class TransferNet(nn.Module):
-    def __init__(self, num_class, base_net='resnet50', transfer_loss='mmd', use_bottleneck=True, bottleneck_width=256, max_iter=1000, **kwargs):
+    def __init__(self, num_class, base_net='resnet34', transfer_loss='mmd', use_bottleneck=True, bottleneck_width=256, max_iter=1000, **kwargs):
         super(TransferNet, self).__init__()
         self.num_class = num_class
         self.base_network = backbones.get_backbone(base_net)
@@ -96,14 +96,6 @@ class TransferNet(nn.Module):
                         aa[i][j] = 0.0
             #print("label_matrix",aa[:5])
             kwargs['target_logits'] =aa
-        elif self.transfer_loss == "daan":
-            source_clf = self.classifier_layer(source)
-            kwargs['source_logits'] = torch.nn.functional.softmax(source_clf, dim=1)
-            target_clf = self.classifier_layer(target)
-            kwargs['target_logits'] = torch.nn.functional.softmax(target_clf, dim=1)
-        elif self.transfer_loss == 'bnm':
-            tar_clf = self.classifier_layer(target)
-            target = nn.Softmax(dim=1)(tar_clf)
         
         transfer_loss = self.adapt_loss(source, target, **kwargs)
         return clf_loss, transfer_loss
