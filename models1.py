@@ -109,18 +109,6 @@ class TransferNet(nn.Module):
             params.append(
                 {'params': self.bottleneck_layer.parameters(), 'lr': 1.0 * initial_lr}
             )
-        # Loss-dependent
-        if self.transfer_loss == "adv":
-            params.append(
-                {'params': self.adapt_loss.loss_func.domain_classifier.parameters(), 'lr': 1.0 * initial_lr}
-            )
-        elif self.transfer_loss == "daan":
-            params.append(
-                {'params': self.adapt_loss.loss_func.domain_classifier.parameters(), 'lr': 1.0 * initial_lr}
-            )
-            params.append(
-                {'params': self.adapt_loss.loss_func.local_classifiers.parameters(), 'lr': 1.0 * initial_lr}
-            )
         return params
 
     def predict(self, x):
