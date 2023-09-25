@@ -3,4 +3,4 @@ The code of the paper "MULTI-MODAL SPEECH EMOTION RECOGNITION USING FEATURE DIST
 
 Other documents will be public after this paper is accepted.
 
-![TEXT](ICASSP 2023 MELD.png)
+![TEXT](https://github.com/shaokai1209/shaokai1209/blob/main/ICASSP%202023%20MELD.png)
