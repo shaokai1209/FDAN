@@ -81,7 +81,7 @@ class TransferNet(nn.Module):
         kwargs = {}
         if self.transfer_loss == "lmmd":
             kwargs['source_label'] = source_label
-            kwargs['target_label'] = target_label
+            #kwargs['target_label'] = target_label
             target_clf = self.classifier_layer(target)
             #kwargs['target_logits'] = torch.nn.functional.softmax(target_clf, dim=1)
             aa = torch.nn.functional.softmax(target_clf, dim=1)
